@@ -7,9 +7,14 @@ g = Github(os.environ['GH_ACCESS_TOKEN'])
 # Replace 'your_username' and 'your_repository' with your GitHub username and repository name
 repo = g.get_repo("DinoDelicdev/actions-tut")
 
-# Iterate over all commits in the repository
-for commit in repo.get_commits():
-    # Iterate over all files changed in each commit
-    for file in commit.files:
-        # Print the filename
-        print(file.filename)
+branch = repo.get_branch(repo.default_branch)
+
+# Get the most recent commit on the default branch
+commit = branch.commit
+
+# Get the list of files changed in the commit
+files_changed = commit.files
+
+# Print the list of changed files
+for file in files_changed:
+    print(file.filename)
